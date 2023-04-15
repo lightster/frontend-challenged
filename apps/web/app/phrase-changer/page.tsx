@@ -61,7 +61,7 @@ function PhraseChanger() {
     }
 
     const timer = setTimeout(() => {
-      // setTransitionState("start");
+      setTransitionState("start");
     }, 2000);
 
     return () => clearTimeout(timer);
