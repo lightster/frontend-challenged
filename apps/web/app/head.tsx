@@ -1,0 +1,29 @@
+export default function Head() {
+  return (
+    <>
+      <script
+        src="https://kit.fontawesome.com/fdfb49fd25.js"
+        crossOrigin="anonymous"
+        async
+      ></script>
+      <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+        crossOrigin="anonymous"
+        precedence="default"
+      />
+      <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossOrigin="anonymous"
+        precedence="default"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;600;700&family=Lora:wght@700&display=swap"
+        rel="stylesheet"
+        crossOrigin="anonymous"
+        precedence="default"
+      />
+    </>
+  );
+}

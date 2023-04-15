@@ -1,0 +1,26 @@
+.headline {
+  font-size: 72px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-weight: 500;
+}
+
+.cyclePhrase {
+  display: inline-block;
+  white-space: nowrap;
+  transition: width 400ms ease-in-out;
+  overflow: clip;
+  position: relative;
+}
+
+.cyclePhrase * {
+  text-decoration: underline #9966ff;
+  text-decoration-thickness: 10px;
+}
+
+.measurePhrase {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  visibility: hidden;
+}

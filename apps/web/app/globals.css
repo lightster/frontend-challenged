@@ -1,0 +1,27 @@
+:root {
+  --font-serif: var(--font-lora), serif;
+  --font-sans-serif: var(--font-libre-franklin), sans-serif;
+}
+
+html,
+body {
+  color-scheme: dark;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-sans-serif);
+  color: white;
+  background: #000000;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  font-weight: 400;
+}

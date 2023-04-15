@@ -1,0 +1,223 @@
+"use client";
+
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
+import useEventListener from "../../hooks/useEventListener";
+
+import styles from "./page.module.css";
+
+interface Dimension {
+  width: number;
+  height: number;
+}
+
+type TransitionState = "initial" | "start" | "end";
+
+// type TransitionState = "paused" | "starting" | "running" | "ending";
+//
+// type callback = (next: () => void) => void;
+//
+// interface CSSTransitionProps {
+//   onPause?: callback;
+//   onStart?: callback;
+//   onRun?: callback;
+//   onEnd?: callback;
+// }
+//
+// function useCSSTransition<T extends HTMLElement>() {
+//   const [transitionState, setTransitionState] =
+//     useState<TransitionState>("paused");
+//   const [repeat, setRepeat] = useState<boolean>(false);
+//   const ref = useRef<T>(null);
+//
+//   const start = useCallback(
+//     ({ repeat: r }: { repeat: boolean } = { repeat: false }) => {
+//       if (typeof r !== "undefined") {
+//         setRepeat(r);
+//       }
+//
+//       setTransitionState((ts) => {
+//         switch (ts) {
+//           case "paused":
+//             return "starting";
+//           case "starting":
+//             return "running";
+//           case "running":
+//             return "ending";
+//           case "ending":
+//             return "paused";
+//         }
+//       });
+//     },
+//     []
+//   );
+//
+//   useEffect(() => {
+//     if (transitionState === "starting") {
+//       setTransitionState("running");
+//     }
+//   }, [transitionState]);
+//
+//   useEffect(() => {
+//     if (transitionState === "ending") {
+//       setTransitionState(repeat ? "starting" : "paused");
+//     }
+//   }, [transitionState, repeat]);
+//
+//   useEventListener(ref, "transitionstart", () => {
+//     if (transitionState === "running") {
+//       setTransitionState("ending");
+//     }
+//   });
+//
+//   useEventListener(ref, "transitionend", () => {
+//     if (transitionState === "running") {
+//       setTransitionState("ending");
+//     }
+//   });
+//
+//   return {
+//     ref,
+//     transitionState,
+//     start,
+//     stop: () => setRepeat(false),
+//   };
+// }
+
+function PhraseChanger() {
+  const phrases = [
+    "frontend developer",
+    "designer",
+    "backend developer",
+    "product manager",
+    "cook",
+  ];
+  const [index, setIndex] = useState(1);
+  const numberOfPhrases = phrases.length;
+  const currentPhrase = phrases[index];
+  const nextPhrase = phrases[(index + 1) % numberOfPhrases];
+  // const { ref, transitionState, start } = useCSSTransition<HTMLDivElement>();
+
+  // const [transitionState, setTransitionState] =
+  //   useState<TransitionState>("paused");
+  const phraseDimensionRef = useRef<HTMLDivElement>(null);
+  const [phraseDimensions, setPhraseDimensions] = useState<Dimension>({
+    width: 0,
+    height: 0,
+  });
+  // const [phraseWidth, setPhraseWidth] = useState<number | "auto">("auto");
+  // const [phraseTop, setPhraseTop] = useState(0);
+  // const [phraseToMeasure, setPhraseToMeasure] = useState(currentPhrase);
+
+  useEffect(() => {
+    if (phraseDimensionRef?.current) {
+      const { offsetWidth, offsetHeight } = phraseDimensionRef?.current;
+      setPhraseDimensions({ width: offsetWidth, height: offsetHeight });
+      // setPhraseTop(-offsetHeight);
+      // setPhraseToMeasure(nextPhrase);
+    }
+  }, [start, index]);
+
+  useEffect(() => {
+    if (phraseDimensions.width !== 0) {
+      start();
+    }
+  }, [start, phraseDimensions]);
+
+  useEffect(() => {
+    if (transitionState !== "paused") {
+      return () => {};
+    }
+
+    const timer = setTimeout(() => {
+      setIndex((currentIndex) => (currentIndex + 1) % numberOfPhrases);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [transitionState, numberOfPhrases]);
+
+  // const top = transitionState === "end" ? -phraseDimensions.height : 0;
+  const top = 0;
+  // const phraseToMeasure =
+  //   transitionState === "paused" ? nextPhrase : currentPhrase;
+
+  return (
+    <div className={styles.headline}>
+      Learn to be
+      <br />a{" "}
+      <div
+        className={`${styles.cyclePhrase} ${styles.nextCyclePhrase}`}
+        ref={phraseDimensionRef}
+        aria-hidden={true}
+      >
+        {currentPhrase}
+      </div>
+      <div
+        className={styles.cyclePhrase}
+        ref={ref}
+        style={
+          transitionState !== "paused"
+            ? {
+                width: `${phraseDimensions.width}px`,
+                height: `${phraseDimensions.height}px`,
+              }
+            : {}
+        }
+      >
+        {/*<div*/}
+        {/*  style={*/}
+        {/*    transitionState !== "configuring"*/}
+        {/*      ? {*/}
+        {/*          marginLeft: `50%`,*/}
+        {/*          position: "absolute",*/}
+        {/*          left: `-${phraseDimensions.width / 2}px`,*/}
+        {/*          transition: "top 400ms ease-in-out",*/}
+        {/*          top: `-${phraseDimensions.height}px`,*/}
+        {/*        }*/}
+        {/*      : { display: "none" }*/}
+        {/*  }*/}
+        {/*>*/}
+        {/*  {nextPhrase}*/}
+        {/*</div>*/}
+        <div
+          style={{
+            position: "relative",
+            transition: "top 400ms ease-in-out",
+            top: `${top}px`,
+            ...(transitionState !== "paused"
+              ? {
+                  marginLeft: `50%`,
+                  left: `-${phraseDimensions.width / 2}px`,
+                }
+              : {}),
+          }}
+        >
+          {currentPhrase}
+        </div>
+      </div>{" "}
+      today {top}
+      <br />
+      <small style={{ fontSize: ".5em", lineHeight: "110%" }}>
+        {currentPhrase}
+        <br />
+        {nextPhrase}
+        <br />
+        {transitionState}
+      </small>
+    </div>
+  );
+}
+
+export default function Page() {
+  return (
+    <div>
+      <h1>Phrase changer</h1>
+      <PhraseChanger />
+    </div>
+  );
+}
