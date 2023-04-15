@@ -6,11 +6,12 @@
 }
 
 .cyclePhrase {
-  display: inline-flex;
+  display: inline-block;
   white-space: nowrap;
   transition: width 400ms ease-in-out;
-  overflow: hidden;
+  overflow: clip;
   position: relative;
+  vertical-align: bottom;
 }
 
 .cyclePhrase * {
