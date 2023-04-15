@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  RefObject,
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
-import { start } from "repl";
+import { RefObject, useEffect, useRef, useState } from "react";
 import useEventListener from "../../hooks/useEventListener";
 
 import styles from "./page.module.css";
@@ -19,77 +11,6 @@ interface Dimension {
 }
 
 type TransitionState = "measure" | "start" | "end";
-
-// type TransitionState = "paused" | "starting" | "running" | "ending";
-//
-// type callback = (next: () => void) => void;
-//
-// interface CSSTransitionProps {
-//   onPause?: callback;
-//   onStart?: callback;
-//   onRun?: callback;
-//   onEnd?: callback;
-// }
-//
-// function useCSSTransition<T extends HTMLElement>() {
-//   const [transitionState, setTransitionState] =
-//     useState<TransitionState>("paused");
-//   const [repeat, setRepeat] = useState<boolean>(false);
-//   const ref = useRef<T>(null);
-//
-//   const start = useCallback(
-//     ({ repeat: r }: { repeat: boolean } = { repeat: false }) => {
-//       if (typeof r !== "undefined") {
-//         setRepeat(r);
-//       }
-//
-//       setTransitionState((ts) => {
-//         switch (ts) {
-//           case "paused":
-//             return "starting";
-//           case "starting":
-//             return "running";
-//           case "running":
-//             return "ending";
-//           case "ending":
-//             return "paused";
-//         }
-//       });
-//     },
-//     []
-//   );
-//
-//   useEffect(() => {
-//     if (transitionState === "starting") {
-//       setTransitionState("running");
-//     }
-//   }, [transitionState]);
-//
-//   useEffect(() => {
-//     if (transitionState === "ending") {
-//       setTransitionState(repeat ? "starting" : "paused");
-//     }
-//   }, [transitionState, repeat]);
-//
-//   useEventListener(ref, "transitionstart", () => {
-//     if (transitionState === "running") {
-//       setTransitionState("ending");
-//     }
-//   });
-//
-//   useEventListener(ref, "transitionend", () => {
-//     if (transitionState === "running") {
-//       setTransitionState("ending");
-//     }
-//   });
-//
-//   return {
-//     ref,
-//     transitionState,
-//     start,
-//     stop: () => setRepeat(false),
-//   };
-// }
 
 function getRefDimensions<T extends HTMLElement>(ref: RefObject<T>) {
   if (!ref?.current) {
@@ -208,7 +129,9 @@ function PhraseChanger() {
             position: "absolute",
             left: `-${nextDimensions.width / 2}px`,
             transition:
-              transitionState !== "measure" ? "top 400ms ease-in-out" : "initial",
+              transitionState !== "measure"
+                ? "top 400ms ease-in-out"
+                : "initial",
             top:
               transitionState === "measure"
                 ? `-${nextDimensions.height}px`
@@ -226,7 +149,9 @@ function PhraseChanger() {
           style={{
             position: "relative",
             transition:
-              transitionState !== "measure" ? "top 400ms ease-in-out" : "initial",
+              transitionState !== "measure"
+                ? "top 400ms ease-in-out"
+                : "initial",
             top:
               transitionState === "measure"
                 ? "0px"
@@ -241,7 +166,8 @@ function PhraseChanger() {
         >
           {currentPhrase}
         </div>
-      </div>{" "}today
+      </div>{" "}
+      today
     </div>
   );
 }
