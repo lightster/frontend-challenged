@@ -1,8 +1,47 @@
 .headline {
-  font-size: 72px;
+  font-size: 24px;
   text-align: center;
   font-family: var(--font-serif);
   font-weight: 500;
+  line-height: 150%;
+}
+
+.copy {
+  text-decoration: underline #9966ff;
+  text-decoration-thickness: 5px;
+  vertical-align: bottom;
+}
+
+.surroundingText {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+@media screen and (min-width: 800px) {
+  .headline {
+    font-size: 48px;
+    line-height: 125%;
+  }
+
+  .copy {
+    text-decoration-thickness: 10px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .headline {
+    font-size: 72px;
+    line-height: 100%;
+  }
+
+  .copy {
+    text-decoration-thickness: 10px;
+    padding-bottom: 10px;
+  }
+
+  .surroundingText {
+    padding-bottom: 10px;
+  }
 }
 
 .cyclePhrase {
@@ -12,11 +51,6 @@
   overflow: clip;
   position: relative;
   vertical-align: bottom;
-}
-
-.cyclePhrase * {
-  text-decoration: underline #9966ff;
-  text-decoration-thickness: 10px;
 }
 
 .measurePhrase {

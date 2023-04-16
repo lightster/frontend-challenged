@@ -82,10 +82,16 @@ function PhraseChanger() {
     }
   });
 
+  useEventListener("window", "resize", () => {
+    setCurrentDimensions(getRefDimensions(measureCurrentRef));
+    setNextDimensions(getRefDimensions(measureNextRef));
+  });
+
   return (
     <div className={styles.headline}>
       Learn to be
-      <br />a{" "}
+      <br />
+      <div className={styles.surroundingText}>a&nbsp;</div>
       <div
         className={styles.cyclePhrase}
         ref={ref}
@@ -110,23 +116,24 @@ function PhraseChanger() {
       >
         <div
           ref={measureNextRef}
-          className={styles.measurePhrase}
+          className={`${styles.measurePhrase} ${styles.copy}`}
           aria-hidden={true}
         >
           {nextPhrase}
         </div>
         <div
           ref={measureCurrentRef}
-          className={styles.measurePhrase}
+          className={`${styles.measurePhrase} ${styles.copy}`}
           aria-hidden={true}
         >
           {currentPhrase}
         </div>
         <div
           ref={nextRef}
+          className={styles.copy}
           style={{
-            marginLeft: `50%`,
             position: "absolute",
+            marginLeft: `50%`,
             left: `-${nextDimensions.width / 2}px`,
             transition:
               transitionState !== "measure"
@@ -134,10 +141,10 @@ function PhraseChanger() {
                 : "initial",
             top:
               transitionState === "measure"
-                ? `-${nextDimensions.height}px`
+                ? `-${nextDimensions.height + 20}px`
                 : "0px",
             display:
-              transitionState === "measure" && nextDimensions.height == 0
+              nextDimensions.height == 0
                 ? "none"
                 : "initial",
           }}
@@ -146,6 +153,7 @@ function PhraseChanger() {
         </div>
         <div
           ref={currentRef}
+          className={styles.copy}
           style={{
             position: "relative",
             transition:
@@ -166,8 +174,8 @@ function PhraseChanger() {
         >
           {currentPhrase}
         </div>
-      </div>{" "}
-      today
+      </div>
+      <div className={styles.surroundingText}>&nbsp;today</div>
     </div>
   );
 }
