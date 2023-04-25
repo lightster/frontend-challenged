@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.headings {
+  width: 50%;
+}
+
+.spyContainer {
+  width: 50%;
+  position: relative;
+}
+
+.spy {
+  position: sticky;
+  top: 0;
+}
