@@ -8,6 +8,12 @@ export default function Page() {
         <li>
           <Link href="/phrase-changer">Phrase Changer</Link>
         </li>
+        <li>
+          <Link href="/pillars">Pillars</Link>
+        </li>
+        <li>
+          <Link href="/scroll-spy">Scroll Spy</Link>
+        </li>
       </ul>
     </div>
   );

@@ -1,0 +1,145 @@
+.container {
+  display: grid;
+  grid-template-areas:
+    "header1"
+    "description1"
+    "footer1"
+    "gap1"
+    "header2"
+    "description2"
+    "footer2"
+    "gap2"
+    "header3"
+    "description3"
+    "footer3";
+  padding: 30px;
+  background-color: white;
+}
+
+.pillar {
+  box-shadow: 0 0 4px 2px rgba(0, 0, 0, .3);
+  border-radius: 16px;
+}
+
+.header {
+  font-size: 24px;
+  text-align: center;
+  font-family: var(--font-serif);
+  font-weight: 500;
+  line-height: 150%;
+  background-color: #dddddd;
+  color: #000000;
+  border-radius: 16px 16px 0 0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.description {
+  background: white;
+  color: black;
+  padding: 16px;
+}
+
+.footer {
+  background-color: #dddddd;
+  color: #000000;
+  border-radius: 0 0 16px 16px;
+  padding: 16px;
+}
+
+.gap {
+  height: 30px;
+}
+
+
+@media screen and (min-width: 800px) {
+  .container {
+    margin: 0 30px;
+  }
+
+  .header {
+    font-size: 48px;
+    line-height: 125%;
+  }
+}
+
+
+@media screen and (min-width: 1200px) {
+  .container {
+    display: grid;
+    grid-template-areas:
+    "header1 header2 header3"
+    "description1 description2 description3"
+    "footer1 footer2 footer3";
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 30px;
+    margin: 0 30px;
+  }
+
+  .header {
+    font-size: 64px;
+    line-height: 100%;
+  }
+
+  .gap {
+    display: none;
+  }
+}
+
+.pillar1 {
+  grid-area: header1 / description1 / footer1;
+}
+
+.header1 {
+  grid-area: header1;
+}
+
+.description1 {
+  grid-area: description1;
+}
+
+.footer1 {
+  grid-area: footer1;
+}
+
+.gap1 {
+  grid-area: gap1;
+}
+
+.pillar2 {
+  grid-area: header2 / description2 / footer2;
+}
+
+.header2 {
+  grid-area: header2;
+}
+
+.description2 {
+  grid-area: description2;
+}
+
+.footer2 {
+  grid-area: footer2;
+}
+
+.gap2 {
+  grid-area: gap2;
+}
+
+.pillar3 {
+  grid-area: header3 / description3 / footer3;
+}
+
+.header3 {
+  grid-area: header3;
+}
+
+.description3 {
+  grid-area: description3;
+}
+
+.footer3 {
+  grid-area: footer3;
+}
