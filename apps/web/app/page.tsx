@@ -6,6 +6,9 @@ export default function Page() {
       <h1>Challenged</h1>
       <ul>
         <li>
+          <Link href="/phone-number-input">Phone Number Input</Link>
+        </li>
+        <li>
           <Link href="/phrase-changer">Phrase Changer</Link>
         </li>
         <li>
