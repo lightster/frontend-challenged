@@ -24,6 +24,11 @@ export default function RootLayout({ children }: Props) {
       <head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
         <title>Frontend Challenged</title>
+        <script
+          src="https://kit.fontawesome.com/fdfb49fd25.js"
+          crossOrigin="anonymous"
+          async
+        ></script>
       </head>
       <body>{children}</body>
     </html>
